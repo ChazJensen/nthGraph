@@ -7,34 +7,42 @@ class Function{
   }
   
   void drawGraph(){
+    pushMatrix();
     background(255);
     
-    camera(00,00,200,0,0,0,0,1,0);
+    int polySize=5;
+    
+    int xLength = 300;
+    int zLength = 400;
+    
+    camera(00,00,zoom,0,0,-10000000,0,1,0);
     
     stroke(0,255,0);
-    line(-1000,0,0,1000,0,0);
+    line(-10000000,0,0,10000000,0,0);
     stroke(255,0,0);
-    line(0,-1000,0,0,1000,0);
+    line(0,-10000000,0,0,10000000,0);
     stroke(0,0,255);
-    line(0,0,-1000,0,0,1000);
+    line(0,0,-10000000,0,0,10000000);
     
     //noFill();
     //stroke(0);
-    noStroke();
+    stroke(80,0,80,180);
     fill(150,0,150,125);
     //beginShape();
-      for(int x=-100; x<101; x+=5){
-        for(int z=-100; z<101; z+=5){
+    
+      for(int x=-(int)(xLength/2); x<=(int)(xLength/2); x+=polySize){
+        for(int z=-(int)(zLength/2); z<=(int)(zLength/2); z+=polySize){
           beginShape();
           vertex(x,-.1*pow(x,2)+z,z);
-          vertex(x+5,-.1*pow((x+5),2)+z,z);
-          vertex(x+5,-.1*pow((x+5),2)+z+5,z+5);
-          vertex(x,-.1*pow(x,2)+z+5,z+5);
+          vertex(x+polySize,-.1*pow((x+polySize),2)+z,z);
+          vertex(x+polySize,-.1*pow((x+polySize),2)+z+polySize,z+polySize);
+          vertex(x,-.1*pow(x,2)+z+polySize,z+polySize);
           vertex(x,-.1*pow(x,2)+z,z);
           endShape();
         }
       }
     //endShape();
+    popMatrix();
   }
   
 }

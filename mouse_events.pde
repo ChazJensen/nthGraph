@@ -10,3 +10,8 @@ void mousePressed(){
   }
   
 }
+
+void mouseWheel(MouseEvent e){
+  float turn=e.getCount();
+  zoom+=(5*turn);
+}
