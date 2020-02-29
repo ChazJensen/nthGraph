@@ -21,7 +21,7 @@ void settings ()
 void setup ()
 {
   c = new Camera();
-  c.goTo(0, 0, ZOOM_START);
+  c.goTo(-100, 10, -100);
 }
 
 void draw ()
@@ -29,4 +29,5 @@ void draw ()
   background(255);
   
   func.drawGraph();
+  c.call();
 }

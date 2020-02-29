@@ -20,7 +20,10 @@ class Camera
   void setLeft (boolean bool) { moveLeft = bool; updateMovement(); }
   boolean shift = false;
   void setShift (boolean bool) { shift = bool; updateMovement(); }
-  
+  boolean ctrl = false;
+  void setCtrl (boolean bool) { ctrl = bool; updateMovement(); }
+  boolean space = false;
+  void setSpace (boolean bool) { space = bool; updateMovement(); }
 
   Camera ()
   {
@@ -52,21 +55,39 @@ class Camera
     if (shift) {
       if (moveForward) translateAxis(AxisNames.Z, -10);
       if (moveBackward) translateAxis(AxisNames.Z, 10);
-      if (moveRight) rot(AxisNames.Y, PI / 8);
-      if (moveLeft) rot(AxisNames.Y, -PI / 8);
+      if (moveRight) rot(AxisNames.Y, -PI / 4);
+      if (moveLeft) rot( AxisNames.Y,  PI / 4);
+      if (space) translateAxis(AxisNames.Y, 10);
+    } else if (ctrl) {
+      // if (moveForward) 
     } else {
       if (moveForward) zoomInOut( -20);
       if (moveBackward) zoomInOut( 20);
       if (moveRight) translateAxis(AxisNames.X, 10);
       if (moveLeft) translateAxis(AxisNames.X, -10);
+      if (space) translateAxis(AxisNames.Y, -10);
     }
   }
   
-  void rot(AxisNames A, float rads) {
-    float x = sqrt( pow(position[X], 2) + pow(focusPoint[X], 2) ) * sin(rads) / sin((PI - rads)/2);
-    float z = sqrt( pow(position[Z], 2) + pow(focusPoint[Z], 2) ) * cos(rads);
-    // z = position[Z] * cos(rads);
-    goTo(x, position[Y], z);
+  float[] theta = {0.0, 0.0, 0.0};
+  void rot(AxisNames A, float t) {
+    switch (A) {
+      case Y:
+        theta[y] += t;
+        goTo( 100 * cos(theta[Y]), 10, 100 *sin(theta[X]));
+        break;
+      case X:
+        theta[X] += t;
+        goTo( 10, 100 * cos(t), 100 * sin(t));
+        break;
+      case Z:
+        theta[Z] += t;
+        goTo(100 * cos(t), 100 * sin(t), 10);
+        break;
+        
+      default:
+        break;
+    }
   }
 
   void translateAxis(AxisNames A, float dist)

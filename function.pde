@@ -30,8 +30,6 @@ class Function
     int xLength = 30;
     int zLength = 40;
     
-    c.call();
-    
     
     // axes:
     drawAxis(AxisName.X);

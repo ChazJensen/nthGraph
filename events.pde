@@ -1,5 +1,6 @@
 
 void keyPressed() {
+  println(keyCode);
   // w 87
   if (keyCode == 87) c.setForward(true);
   // s 83
@@ -10,7 +11,10 @@ void keyPressed() {
   if (keyCode == 65) c.setLeft(true);
   // shift 16
   if (keyCode == 16) c.setShift(true);
-  
+  // ctrl 17
+  if (keyCode == 17) c.setCtrl(true);
+  // space 32
+  if (keyCode == 32) c.setSpace(true);
   /*
   // w 87
   if (keyCode == 87) c.translateAxis(AxisNames.Z, -10);
@@ -34,7 +38,11 @@ void keyReleased() {
   // a 65
   if (keyCode == 65) c.setLeft(false);
   // shift 16
-  if (keyCode == 16) c.setShift(true);
+  if (keyCode == 16) c.setShift(false);
+  // ctrl 17
+  if (keyCode == 17) c.setCtrl(false);
+  // space 32
+  if (keyCode == 32) c.setSpace(false);
 }
 
 void mouseWheel( MouseEvent e ){
