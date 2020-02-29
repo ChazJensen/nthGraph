@@ -19,10 +19,10 @@ class Function{
     pushMatrix();
     background(255);
     
-    int polySize=5;
+    int polySize=10;
     
-    int xLength = 40;
-    int zLength = 30;
+    int xLength = 400;
+    int zLength = 300;
     
     camera(00,00,zoom,0,0,-10000000,0,1,0);
     
@@ -36,23 +36,73 @@ class Function{
     //noFill();
     //stroke(0);
     stroke(80,0,80,180);
-    fill(150,0,150,125);
+    fill(150,0,150,200);
     //beginShape();
     
     //y=(x^2)*(z^3)*(a^4)*(b^5)*(c^6)
     
     
-      for(int x=-(int)(xLength/2); x<=(int)(xLength/2); x+=polySize){
-        for(int z=-(int)(zLength/2); z<=(int)(zLength/2); z+=polySize){
+      xForSub: for(int x=-(int)(xLength/2); x<=(int)(xLength/2); x+=polySize){
+        zForSub: for(int z=-(int)(zLength/2); z<=(int)(zLength/2); z+=polySize){
           float y0=0,y1=0,y2=0,y3=0;
+          
+          // a string var takes the text-box input and uses a regex to replace varN (any var) with its value
+          String xz = "", xppz = "", xppzpp = "", xzpp = "";
+          
+          
+          if (t.output != null) {
+          
+            Double X = Double.valueOf(x);
+            Double Z = Double.valueOf(z);
+            
+            // look over t.output and preform regexes for different things
+            xz = (t.output).replaceAll("varX", " " + X + " "); // varX -> x as in int x from xForSub
+            xz = xz.replaceAll("varZ", " " + Z + " "); // varZ -> x as in int z from zForSub
+            xz = xz.replaceAll("varA", " " + dimVals.get(0) + " ");
+            xz = xz.replaceAll("varA", " " + dimVals.get(1) + " ");
+            xz = xz.replaceAll("varA", " " + dimVals.get(2) + " ");
+            
+             
+            
+            xppz = (t.output).replaceAll("varX", " " + (X + polySize) + " "); // varX -> x as in int x from xForSub
+            xppz = xppz.replaceAll("varZ", " " + Z + " "); // varZ -> x as in int z from zForSub
+            xppz = xppz.replaceAll("varA", " " + dimVals.get(0) + " ");
+            xppz = xppz.replaceAll("varA", " " + dimVals.get(1) + " ");
+            xppz = xppz.replaceAll("varA", " " + dimVals.get(2) + " ");
+            
+            
+            xppzpp = (t.output).replaceAll("varX", " " + (X + polySize) + " "); // varX -> x as in int x from xForSub
+            xppzpp = xppzpp.replaceAll("varZ", " " + (Z + polySize) + " "); // varZ -> x as in int z from zForSub
+            xppzpp = xppzpp.replaceAll("varA", " " + dimVals.get(0) + " ");
+            xppzpp = xppzpp.replaceAll("varA", " " + dimVals.get(1) + " ");
+            xppzpp = xppzpp.replaceAll("varA", " " + dimVals.get(2) + " ");
+            
+            
+            xzpp = (t.output).replaceAll("varX", " " + X + polySize + " "); // varX -> x as in int x from xForSub
+            xzpp = xzpp.replaceAll("varZ", " " + (Z + polySize) + " "); // varZ -> x as in int z from zForSub
+            xzpp = xzpp.replaceAll("varA", " " + dimVals.get(0) + " ");
+            xzpp = xzpp.replaceAll("varA", " " + dimVals.get(1) + " ");
+            xzpp = xzpp.replaceAll("varA", " " + dimVals.get(2) + " ");
+            
+            println(xz);
+          
+          
+          
+          
           try{
-            y0 = .0000000000000000001*(Double.class.cast(engine.eval("Math.pow("+x+",2)*Math.pow("+z+",3)*Math.pow("+dimVals.get(0)+",4)*Math.pow("+dimVals.get(1)+",5)*Math.pow("+dimVals.get(2)+",6)"))).floatValue();
-            y1 = .0000000000000000001*(Double.class.cast(engine.eval("Math.pow("+(x+polySize)+",2)*Math.pow("+z+",3)*Math.pow("+dimVals.get(0)+",4)*Math.pow("+dimVals.get(1)+",5)*Math.pow("+dimVals.get(2)+",6)"))).floatValue();
-            y2 = .0000000000000000001*(Double.class.cast(engine.eval("Math.pow("+(x+polySize)+",2)*Math.pow("+(z+polySize)+",3)*Math.pow("+dimVals.get(0)+",4)*Math.pow("+dimVals.get(1)+",5)*Math.pow("+dimVals.get(2)+",6)"))).floatValue();
-            y3 = .0000000000000000001*(Double.class.cast(engine.eval("Math.pow("+x+",2)*Math.pow("+(z+polySize)+",3)*Math.pow("+dimVals.get(0)+",4)*Math.pow("+dimVals.get(1)+",5)*Math.pow("+dimVals.get(2)+",6)"))).floatValue();
+            y0 = (Double.class.cast(engine.eval(xz))).floatValue();
+            y1 = (Double.class.cast(engine.eval(xppz))).floatValue();
+            y2 = (Double.class.cast(engine.eval(xppzpp))).floatValue();
+            y3 = (Double.class.cast(engine.eval(xzpp))).floatValue();
+            println(y0);
           }catch(ScriptException e){
             e.printStackTrace();
           }
+          
+          
+          }
+          
+          
           beginShape();
           vertex(x,-.1*y0,z);
           vertex(x+polySize,-.1*y1,z);
@@ -60,6 +110,7 @@ class Function{
           vertex(x,-.1*y3,z+polySize);
           vertex(x,-.1*y0,z);
           endShape();
+          // */
         }
       }
     //endShape();
