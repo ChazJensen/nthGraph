@@ -3,7 +3,10 @@ import javax.script.*;
 ScriptEngineManager mgr = new ScriptEngineManager();
 ScriptEngine engine = mgr.getEngineByName("JavaScript");
 
-String test = "3*sin(PI)";
+
+int wololo = 7;
+
+String test = "Math.pow(" + wololo + ",2)";
 
 Function func = new Function();
 Button btnUp;
@@ -26,4 +29,9 @@ void setup(){
 
 void draw(){
   func.drawGraph();
+  try{
+    println((engine.eval(test)));
+  }catch(ScriptException e){
+    e.printStackTrace();
+  }
 }

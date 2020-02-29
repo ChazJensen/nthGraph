@@ -1,14 +1,16 @@
 void mousePressed(){
-  if(btnUp.mouseIsHovering()){
-    cameraY+=10;
-    camera(cameraX,cameraY,cameraZ, width/2.0, height/2.0, 0, 0, 1, 0);
+  for(int s=0; s<func.slices.size(); s++){
+    if(func.slices.get(s).mouseIsHovering()){
+      func.slices.get(s).hold=true;
+    }
   }
   
-  if(btnDown.mouseIsHovering()){
-    cameraY-=10;
-    camera(cameraX,cameraY,cameraZ, width/2.0, height/2.0, 0, 0, 1, 0);
+}
+
+void mouseReleased(){
+  for(int s=0; s<func.slices.size(); s++){
+    if(func.slices.get(s).hold)func.slices.get(s).hold=false;
   }
-  
 }
 
 void mouseWheel(MouseEvent e){
