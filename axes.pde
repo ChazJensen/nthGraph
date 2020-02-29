@@ -24,9 +24,14 @@ class Axes {
     if(keyPressed){
        if(keyCode == 16) zRotation = (TWO_PI * -mouseY/height);
     }
+    noFill();
+    stroke(0);
+    rectMode(CENTER);
+    rect(30,0,550,500,100/13);
     rotateY(xRotation);
     rotateX(yRotation);
     rotateZ(zRotation);
+    rectMode(CORNER);
     line(-100 * axesScales[0], 0, 0, 100 * axesScales[0], 0, 0); //x
     line(0, -100 * axesScales[0], 0, 0, 100 * axesScales[0], 0); //y
     line(0, 0, -100 * axesScales[0], 0, 0, 100 * axesScales[0]); //z

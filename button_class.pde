@@ -36,7 +36,7 @@ class Button{
       fill(c);
       rect(0,0,w,h,100/13); //changed from w/13+h/13 to 100/13 for consistency
       fill(0);
-      textSize(12);
+      textSize(18);
       textAlign(CENTER,CENTER);
       text(title,w/2,h/2);
       popMatrix();

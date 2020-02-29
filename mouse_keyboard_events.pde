@@ -36,3 +36,13 @@ void keyPressed() {
     userInput = "";
   }
 }
+
+void mousePressed() {
+  for (Button b : numButtons) {
+    if (b == k_enter && b.mouseIsHovering()) {
+      println(userInput);
+      t.analyzeInput();
+      userInput = "";
+    } else if (b.mouseIsHovering()) userInput += b.insertText;
+  }
+}

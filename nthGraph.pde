@@ -28,8 +28,29 @@ Button k8;
 Button k9;
 Button k0;
 
-//Button k_e;
-//Button k_pi;
+Button k_e;
+Button k_pi;
+
+Button k_add;
+Button k_subtract;
+Button k_mult;
+Button k_div;
+Button k_root;
+Button k_exp;
+Button k_ln;
+Button k_abs;
+
+Button k_openP;
+Button k_closeP;
+
+Button k_sin;
+Button k_cos;
+Button k_tan;
+Button k_arcsin;
+Button k_arccos;
+Button k_arctan;
+
+Button k_enter;
 
 ArrayList<Button> numButtons = new ArrayList<Button>();
 
@@ -38,7 +59,7 @@ ScriptEngine engine = mgr.getEngineByName("JavaScript");
 
 
 void setup() {
-  final int numpadXShift = 0;
+  final int numpadXShift = -50;
   final int numpadYShift = 0;
   k1 = new Button(100+numpadXShift, 100+numpadYShift, 50, 50, "1", "1");
   numButtons.add(k1);
@@ -60,7 +81,47 @@ void setup() {
   numButtons.add(k9);
   k0 = new Button(100+numpadXShift, 280+numpadYShift, 170, 50, "0", "0");
   numButtons.add(k0);
-  
+  k_e = new Button(100+numpadXShift, 340+numpadYShift, 80, 50, "e", "/e");
+  numButtons.add(k_e);
+  k_pi = new Button(190+numpadXShift, 340+numpadYShift, 80, 50, "π", "π");
+  numButtons.add(k_pi);
+
+  Button k_add = new Button(280+numpadXShift, 100+numpadYShift, 50, 50, "+", "+");
+  numButtons.add(k_add);
+  Button k_subtract = new Button(340+numpadXShift, 100+numpadYShift, 50, 50, "-", "-");
+  numButtons.add(k_subtract);
+  Button k_mult = new Button(280+numpadXShift, 160+numpadYShift, 50, 50, "×", "*");
+  numButtons.add(k_mult);
+  Button k_div = new Button(340+numpadXShift, 160+numpadYShift, 50, 50, "÷", "/");
+  numButtons.add(k_div);
+  Button k_root = new Button(280+numpadXShift, 220+numpadYShift, 50, 50, "√", "sqrt(");
+  numButtons.add(k_root);
+  Button k_exp = new Button(340+numpadXShift, 220+numpadYShift, 50, 50, "^", "^");
+  numButtons.add(k_exp);
+  Button k_ln = new Button(280+numpadXShift, 280+numpadYShift, 50, 50, "ln", "ln(");
+  numButtons.add(k_ln);
+  Button k_abs = new Button(340+numpadXShift, 280+numpadYShift, 50, 50, "|x|", "abs(");
+  numButtons.add(k_abs);
+  Button k_openP = new Button(280+numpadXShift, 340+numpadYShift, 50, 50, "(", "(");
+  numButtons.add(k_openP);
+  Button k_closeP = new Button(340+numpadXShift, 340+numpadYShift, 50, 50, ")", ")");
+  numButtons.add(k_closeP);
+  Button k_sin = new Button(400+numpadXShift, 100+numpadYShift, 70, 50, "sin", " sin(");
+  numButtons.add(k_sin);
+  Button k_cos = new Button(480+numpadXShift, 100+numpadYShift, 70, 50, "cos", " cos(");
+  numButtons.add(k_cos);
+  Button k_tan = new Button(560+numpadXShift, 100+numpadYShift, 70, 50, "tan", " tan(");
+  numButtons.add(k_tan);
+  Button k_arcsin = new Button(400+numpadXShift, 160+numpadYShift, 70, 50, "arcsin", "arcsin(");
+  numButtons.add(k_arcsin);
+  Button k_arccos = new Button(480+numpadXShift, 160+numpadYShift, 70, 50, "arccos", "arccos(");
+  numButtons.add(k_arccos);
+  Button k_arctan = new Button(560+numpadXShift, 160+numpadYShift, 70, 50, "arctan", "arctan(");
+  numButtons.add(k_arctan);
+  Button k_enter = new Button(400+numpadXShift, 220+numpadYShift, 230, 170, "Enter", ""); //add special effect for when this is pressed
+  numButtons.add(k_enter);
+
+
   background(255);
   stroke(0);
   strokeWeight(3);
@@ -72,20 +133,20 @@ void setup() {
 void draw() {
   background(255);
   pushMatrix();
-  for(Button b : numButtons){
+  for (Button b : numButtons) {
     b.drawButton();
   }
   popMatrix();
-  
+
   pushMatrix();
   translate(width/2+250, height/2-50);
   a.drawAxes();
   popMatrix();
-  
+
   pushMatrix();
   translate(width/2+250, height/2-50);
   t.drawTextbox();
   popMatrix();
-  
+
   time++;
 }
