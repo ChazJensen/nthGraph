@@ -9,7 +9,7 @@ class Function{
   
   Function(){
     for(int n=0; n<hDimms; n++){
-      slices.add(new Slider((40*n)+20, 0, (int)zoom, 100));
+      slices.add(new Slider((40*n)+20, 0, (int)zoom, 100, n+4 + ""));
       dimVals.add(slices.get(n).value);
     }
   }

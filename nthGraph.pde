@@ -29,6 +29,8 @@ boolean labelsEnabled = false;
 boolean textboxEnabled = false;
 boolean helpEnabled = false;
 
+// PCSlider polyCountSlider;
+
 Button k1;
 Button k2;
 Button k3;
@@ -73,13 +75,13 @@ Button varC;
 ArrayList<Button> numButtons = new ArrayList<Button>();
 
 
-void settings(){
-  size(1920,1080,P3D);
+void settings() {
+  size(1920, 1080, P3D);
   smooth(16);
 }
 
-void setup(){
-  
+void setup() {
+
   final int numpadXShift =-50;
   final int numpadYShift = 620;
   k1 = new Button(100+numpadXShift, 100+numpadYShift, 50, 50, "1", "1");
@@ -151,18 +153,20 @@ void setup(){
   numButtons.add(varB);
   varC=new Button(640+numpadXShift, 340+numpadYShift, 50, 50, "C", "varC");
   numButtons.add(varC);
-  
+
+  // polyCountSlider = new PCSlider(200, 200, (int)zoom, 100);
+
   t = new Textbox(-200, 500);
-  
 }
 
-void draw(){
-  func.drawGraph(); /*
+void draw() {
+  func.drawGraph();
   try{
-    println((engine.eval(test)));
-  }catch(ScriptException e){
-    e.printStackTrace();
-  }*/
+   println((engine.eval(test)));
+   }catch(ScriptException e){
+   // e.printStackTrace();
+   println("you faile");
+   }
   pushMatrix();
   //scale(.5,.5);
   for (Button b : numButtons) {
@@ -178,5 +182,6 @@ void draw(){
   translate(width/2+250, height/2-50);
   t.drawTextbox();
   popMatrix();
-  
+
+  // polyCountSlider.drawSlider();
 }
